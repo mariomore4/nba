@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link type="text/css" href='{% static "css/inicio_sesion.css" %}' rel='stylesheet'/>
+    <style>
+        /* Estilo para el botón de registrarse */
+        .registrarse-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .registrarse-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botón de Registrarse en la parte superior derecha -->
+    <a href="{% url 'registro' %}" class="registrarse-btn">Registrarse</a>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div style="background-color: green; color: white; padding: 10px;">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div style="background-color: red; color: white; padding: 10px;">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <h2>Iniciar Sesión</h2>
+    <form method="post" action="{% url 'inicio_sesion' %}">
+        {% csrf_token %}
+        <div>
+            <label for="id_username">Nombre de Usuario:</label>
+            <input type="text" name="username" id="id_username">
+        </div>
+        <div>
+            <label for="id_password">Contraseña:</label>
+            <input type="password" name="password" id="id_password">
+        </div>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <a href="{% url 'recuperar_contraseña' %}">¿Has olvidado la contraseña?</a>
+
+</body>
+</html>

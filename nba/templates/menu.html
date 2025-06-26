@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Menú Principal NBA</title>
+    <link type="text/css" href='{% static "css/menu.css" %}' rel='stylesheet' />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="logout-container">
+        <form action="{% url 'cerrar_sesion' %}" method="post" class="logout-btn">
+            {% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+
+    {# Mostrar equipo favorito solo si está definido #}
+    {% if equipo_favorito and logo_equipo %}
+    <div class="equipo-favorito">
+        <h3>Tu equipo favorito:</h3>
+        <img src="{% static logo_equipo %}" alt="{{ equipo_favorito }}" class="logo-equipo" />
+        <p>{{ equipo_favorito }}</p>
+    </div>
+    {% endif %}
+
+    {# Mostrar último partido solo si existe #}
+    {% if ultimo_partido %}
+    <div class="partidos-favorito">
+        <div class="ultimo-partido">
+            <h4>Último partido:</h4>
+            <p>
+                {{ ultimo_partido.home }} {{ ultimo_partido.home_score }} - {{ ultimo_partido.visitor_score }} {{ ultimo_partido.visitor }}
+            </p>
+            <p>Estado: {{ ultimo_partido.estado }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="noticias">
+        <h2>Últimas Noticias de la NBA</h2>
+        <ul>
+            {% for noticia in noticias %}
+            <li>
+                <strong>{{ noticia.title }}</strong>
+            </li>
+            {% empty %}
+            <li>No se encontraron noticias.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="footer-nav">
+        <a href="{% url 'noticias' %}" class="nav-button {% if section == 'noticias' %}active{% endif %}">Noticias</a>
+        <a href="{% url 'partidos' %}" class="nav-button {% if section == 'partidos' %}active{% endif %}">Partidos</a>
+        <a href="{% url 'clasificacion' %}" class="nav-button {% if section == 'clasificacion' %}active{% endif %}">Clasificación</a>
+        <a href="{% url 'descubrir' %}" class="nav-button {% if section == 'descubrir' %}active{% endif %}">Descubrir</a>
+    </div>
+</body>
+</html>

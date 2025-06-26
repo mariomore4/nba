@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partidos NBA</title>
+    <link type="text/css" href='{% static "css/partidos.css" %}' rel='stylesheet'/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Contenedor del botón de cerrar sesión -->
+    <div class="logout-container">
+        <form action="{% url 'cerrar_sesion' %}" method="post" class="logout-btn">
+            {% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+
+    <!-- Selector de fecha -->
+    <div class="fecha-container">
+        <label for="fecha">Selecciona una fecha:</label>
+        <input type="date" id="fecha" name="fecha" value="{{ fecha }}" min="2015-10-18">
+    </div>
+
+    <div class="partidos">
+        <h2>Partidos del <span id="fecha-seleccionada"></span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Visitante</th>
+                    <th>Marcador Visitante</th>
+                    <th>Local</th>
+                    <th>Marcador Local</th>
+                    <th>Arena</th>
+                    <th>Estadísticas</th>
+                </tr>
+            </thead>
+            <tbody id="partidos-list">
+                {% for partido in partidos %}
+                <tr>
+                    <td>{{ partido.teams.visitors.name }}</td>
+                    <td>{{ partido.scores.visitors.points }}</td>
+                    <td>{{ partido.teams.home.name }}</td>
+                    <td>{{ partido.scores.home.points }}</td>
+                    <td>{{ partido.arena.name }}</td>
+                    <td>
+                        <a href="{% url 'stats_partido' partido.id %}">Ver estadísticas</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botones fijos en la parte inferior -->
+    <div class="footer-nav">
+        <a href="{% url 'noticias' %}" class="nav-button {% if section == 'noticias' %}active{% endif %}">Noticias</a>
+        <a href="{% url 'partidos' %}" class="nav-button {% if section == 'partidos' %}active{% endif %}">Partidos</a>
+        <a href="{% url 'clasificacion' %}" class="nav-button {% if section == 'clasificacion' %}active{% endif %}">Clasificación</a>
+        <a href="{% url 'descubrir' %}" class="nav-button {% if section == 'descubrir' %}active{% endif %}">Descubrir</a>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            let timeout;  // Variable para manejar el debounce
+            let fechaHoy = new Date().toISOString().split('T')[0];
+            $("#fecha").val(fechaHoy);
+            $("#fecha-seleccionada").text(fechaHoy);
+            cargarPartidos(fechaHoy);
+    
+            // Cambiar partidos cuando se selecciona una nueva fecha
+            $("#fecha").on("change", function() {
+                let fechaSeleccionada = $(this).val();
+                $("#fecha-seleccionada").text(fechaSeleccionada);
+    
+                // Evitar múltiples solicitudes simultáneas
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    if (fechaSeleccionada) {
+                        cargarPartidos(fechaSeleccionada);
+                    }
+                }, 1000);  // Usar un debounce de 1 segundo
+            });
+    
+            function cargarPartidos(fecha) {
+                $.ajax({
+                    url: `/obtener_partidos/?fecha=${fecha}`,  // Cambiado para llamar al backend
+                    method: 'GET',
+                    success: function(response) {
+                        if (!response || !response.response || response.response.length === 0) {
+                            $('#partidos-list').html(`<tr><td colspan="5">No se encontraron partidos.</td></tr>`);
+                            return;
+                        }
+    
+                        let partidosHTML = '';
+                        response.response.forEach(function(partido) {
+                            let visitante = partido.teams.visitors.name || 'Desconocido';
+                            let local = partido.teams.home.name || 'Desconocido';
+                            let marcadorVisitante = partido.scores.visitors.points !== null ? partido.scores.visitors.points : '-';
+                            let marcadorLocal = partido.scores.home.points !== null ? partido.scores.home.points : '-';
+                            let arena = partido.arena?.name || 'Desconocido';
+                            let ciudad = partido.arena?.city || '';
+                            let estado = partido.arena?.state || '';
+                            let pais = partido.arena?.country || '';
+    
+                            partidosHTML += `
+                                <tr>
+                                    <td>${visitante}</td>
+                                    <td>${marcadorVisitante}</td>
+                                    <td>${local}</td>
+                                    <td>${marcadorLocal}</td>
+                                    <td>${arena}, ${ciudad}, ${estado}, ${pais}</td>
+                                    <td><a href="/stats_partido/${partido.id}/">Ver estadísticas</a></td>
+                                </tr>
+                            `;
+                        });
+    
+                        $('#partidos-list').html(partidosHTML);
+                    },
+                    error: function(error) {
+                        $('#partidos-list').html(`<tr><td colspan="5">Error al obtener los datos.</td></tr>`);
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

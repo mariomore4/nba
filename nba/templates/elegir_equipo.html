@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Elegir Equipo</title>
+    <link rel="stylesheet" href="{% static 'css/elegir_equipo.css' %}">
+</head>
+<body>
+    <h1>Elige tu equipo favorito</h1>
+    <form id="teamForm" method="post">
+        {% csrf_token %}
+        <div class="teams-grid">
+            {% for equipo in equipos %}
+                <div class="team-card"
+                     data-team-nombre="{{ equipo.nombre }}"
+                     data-team-logo="{{ equipo.logo }}">
+                    <img src="{% static 'logos/' %}{{ equipo.logo }}" alt="{{ equipo.nombre }}">
+                    <p>{{ equipo.nombre }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Inputs ocultos para enviar el nombre y el logo -->
+        <input type="hidden" name="equipo_nombre" id="selectedTeamName">
+        <input type="hidden" name="equipo_logo" id="selectedTeamLogo">
+
+        <button type="submit" id="continueBtn" disabled>Continuar</button>
+    </form>
+
+    <script>
+        const cards = document.querySelectorAll('.team-card');
+        const continueBtn = document.getElementById('continueBtn');
+        const inputNombre = document.getElementById('selectedTeamName');
+        const inputLogo = document.getElementById('selectedTeamLogo');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                inputNombre.value = card.getAttribute('data-team-nombre');
+                inputLogo.value = card.getAttribute('data-team-logo');
+                continueBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

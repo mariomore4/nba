@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña</title>
+    <link type="text/css" href='{% static "css/recuperar_contraseña.css" %}' rel='stylesheet'/>
+</head>
+<body>
+    <h2>Recuperar Contraseña</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" name="email" required>
+        {{ form.as_p }}
+        <button type="submit">Aceptar</button>
+    </form>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notification {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

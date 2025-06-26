@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas del Partido</title>
+    <link type="text/css" href="{% static 'css/stats_partido.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="logout-container">
+        <form action="{% url 'cerrar_sesion' %}" method="post" class="logout-btn">
+            {% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+
+    <h1 style="text-align: center;">Estadísticas del Partido</h1>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else %}
+        <!-- Eliminar estas líneas de fecha y arena -->
+        <!-- <h2>Fecha: {{ fecha_partido }}</h2>
+        <p>Arena: {{ arena }} ({{ ciudad }})</p> -->
+
+        <h3 style="text-align: center;">Equipos:</h3>
+        <div style="text-align: center;">
+            <div>
+                <p>{{ equipos.0.name }} - {{ estadisticas_equipo_1.points }} puntos</p>
+                <img src="{{ equipos.0.logo }}" alt="{{ equipos.0.name }}" class="team-logo">
+            </div>
+            <div>
+                <p>{{ equipos.1.name }} - {{ estadisticas_equipo_2.points }} puntos</p>
+                <img src="{{ equipos.1.logo }}" alt="{{ equipos.1.name }}" class="team-logo">
+            </div>
+        </div>
+
+        <h3 style="text-align: center;">Estadísticas del Equipo {{ equipos.0.name }}:</h3>
+        <table class="stats-table">
+            <tr>
+                <th>Estadística</th>
+                <th>Valor</th>
+            </tr>
+            {% for stat, value in estadisticas_equipo_1.items %}
+                <tr>
+                    <td>{{ stat|title }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h3 style="text-align: center;">Estadísticas del Equipo {{ equipos.1.name }}:</h3>
+        <table class="stats-table">
+            <tr>
+                <th>Estadística</th>
+                <th>Valor</th>
+            </tr>
+            {% for stat, value in estadisticas_equipo_2.items %}
+                <tr>
+                    <td>{{ stat|title }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h3 style="text-align: center;">Estadísticas de Jugadores:</h3>
+        <table class="stats-table">
+            <tr>
+                <th>Jugador</th>
+                <th>Equipo</th>
+                <th>Min</th>
+                <th>PTS</th>
+                <th>FGM</th>
+                <th>FGA</th>
+                <th>FG%</th>
+                <th>FTM</th>
+                <th>FTA</th>
+                <th>FT%</th>
+                <th>3PM</th>
+                <th>3PA</th>
+                <th>3P%</th>
+                <th>OREB</th>
+                <th>DREB</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TO</th>
+                <th>PF</th>
+                <th>+/-</th>
+            </tr>
+            {% for jugador in jugadores %}
+                <tr>
+                    <td>{{ jugador.player.firstname }} {{ jugador.player.lastname }}</td>
+                    <td>{{ jugador.team.name }}</td>
+                    <td>{{ jugador.min }}</td>
+                    <td>{{ jugador.points }}</td>
+                    <td>{{ jugador.fgm }}</td>
+                    <td>{{ jugador.fga }}</td>
+                    <td>{{ jugador.fgp }}</td>
+                    <td>{{ jugador.ftm }}</td>
+                    <td>{{ jugador.fta }}</td>
+                    <td>{{ jugador.ftp }}</td>
+                    <td>{{ jugador.tpm }}</td>
+                    <td>{{ jugador.tpa }}</td>
+                    <td>{{ jugador.tpp }}</td>
+                    <td>{{ jugador.offReb }}</td>
+                    <td>{{ jugador.defReb }}</td>
+                    <td>{{ jugador.totReb }}</td>
+                    <td>{{ jugador.assists }}</td>
+                    <td>{{ jugador.steals }}</td>
+                    <td>{{ jugador.blocks }}</td>
+                    <td>{{ jugador.turnovers }}</td>
+                    <td>{{ jugador.pFouls }}</td>
+                    <td>{{ jugador.plusMinus }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <div class="footer-nav">
+        <a href="{% url 'noticias' %}" class="nav-button {% if section == 'noticias' %}active{% endif %}">Noticias</a>
+        <a href="{% url 'partidos' %}" class="nav-button {% if section == 'partidos' %}active{% endif %}">Partidos</a>
+        <a href="{% url 'clasificacion' %}" class="nav-button {% if section == 'clasificacion' %}active{% endif %}">Clasificación</a>
+        <a href="{% url 'descubrir' %}" class="nav-button {% if section == 'descubrir' %}active{% endif %}">Descubrir</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubrir NBA</title>
+    <link type="text/css" href='{% static "css/descubrir.css" %}' rel='stylesheet'/>
+</head>
+<body>
+
+    <div class="logout-container">
+    <form action="{% url 'cerrar_sesion' %}" method="post" class="logout-btn">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
+    </div>
+
+    <div class="container">
+        <!-- Contenedor para el buscador -->
+        <div class="search-container">
+            <h1>Buscar Jugadores</h1>
+            <input type="text" id="search-input" placeholder="Escribe el nombre de un jugador..." />
+        </div>
+
+        <!-- Desplegable de jugadores -->
+        <div id="jugadores-dropdown" style="display: none;">
+            <h2>Resultados:</h2>
+            <ul id="jugadores-list"></ul>
+        </div>
+
+        <!-- Resultados de jugadores -->
+        <div class="resultados-container">
+            <h2>Detalles del Jugador:</h2>
+            <div id="jugador-details"></div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="{% url 'noticias' %}" class="nav-button {% if section == 'noticias' %}active{% endif %}">Noticias</a>
+        <a href="{% url 'partidos' %}" class="nav-button {% if section == 'partidos' %}active{% endif %}">Partidos</a>
+        <a href="{% url 'clasificacion' %}" class="nav-button {% if section == 'clasificacion' %}active{% endif %}">Clasificación</a>
+        <a href="{% url 'descubrir' %}" class="nav-button {% if section == 'descubrir' %}active{% endif %}">Descubrir</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let searchTimeout;
+
+            function normalizeString(str) {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            }
+
+            function buscar() {
+                const searchQuery = normalizeString($('#search-input').val().trim());
+
+                if (searchQuery === "") {
+                    $('#jugadores-dropdown').hide();
+                    $('#jugadores-list').empty();
+                    $('#jugador-details').empty();
+                    return;
+                }
+
+                $('#jugadores-list').empty();
+                $('#jugador-details').empty();
+
+                $.ajax({
+                    url: "{% url 'descubrir' %}",
+                    data: { 'search': searchQuery },
+                    dataType: 'json',
+                    success: function (data) {
+                        const jugadores = data.jugadores || [];
+
+                        if (jugadores.length > 0) {
+                            $('#jugadores-dropdown').show();
+
+                            jugadores.forEach(jugador => {
+                                const nombreCompleto = jugador.firstName + " " + jugador.lastName;
+
+                                $('#jugadores-list').append(`
+                                    <li class="jugador-item" data-id="${jugador.id}">
+                                        ${nombreCompleto}
+                                    </li>
+                                `);
+                            });
+
+                            $('.jugador-item').on('click', function () {
+                                const jugadorId = $(this).data('id');
+                                const jugadorSeleccionado = jugadores.find(j => j.id === jugadorId);
+                                mostrarDetallesJugador(jugadorSeleccionado);
+                            });
+
+                        } else {
+                            $('#jugadores-list').append('<li>No se encontró ningún jugador con ese nombre.</li>');
+                        }
+                    },
+                    error: function () {
+                        $('#jugadores-list').append('<li>Error al obtener datos de la API.</li>');
+                    }
+                });
+            }
+
+            function mostrarDetallesJugador(jugador) {
+                const activo = jugador.active ? "Sí" : "No";
+                const birthDate = jugador.birthDate || 'No disponible';
+                const birthCountry = jugador.birthCountry || 'No disponible';
+                const nbaStart = jugador.nbaStart || 'No disponible';
+                const proYears = jugador.proYears || 'No disponible';
+                const height = jugador.height || 'No disponible';
+                const heightMeters = jugador.heightMeters || 'No disponible';
+                const weightLbs = jugador.weightLbs || 'No disponible';
+                const weightKg = jugador.weightKg || 'No disponible';
+                const college = jugador.college || 'No disponible';
+                const affiliation = jugador.affiliation || 'No disponible';
+                const jersey = jugador.jersey || 'No disponible';
+                const position = jugador.position || 'No disponible';
+
+                $('#jugador-details').html(`
+                    <p><strong>Nombre:</strong> ${jugador.firstName} ${jugador.lastName}</p>
+                    <p><strong>Fecha de nacimiento:</strong> ${birthDate}</p>
+                    <p><strong>País:</strong> ${birthCountry}</p>
+                    <p><strong>Año de inicio en la NBA:</strong> ${nbaStart}</p>
+                    <p><strong>Años como profesional:</strong> ${proYears}</p>
+                    <p><strong>Altura:</strong> ${height} (${heightMeters} m)</p>
+                    <p><strong>Peso:</strong> ${weightLbs} lb (${weightKg} kg)</p>
+                    <p><strong>Universidad:</strong> ${college}</p>
+                    <p><strong>Afiliación:</strong> ${affiliation}</p>
+                    <p><strong>Número de camiseta:</strong> ${jersey}</p>
+                    <p><strong>Posición:</strong> ${position}</p>
+                    <p><strong>Activo en la liga:</strong> ${activo}</p>
+                `);
+            }
+
+            $('#search-input').on('input', function () {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(buscar, 300);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación NBA</title>
+    <link type="text/css" href='{% static "css/clasificacion.css" %}' rel='stylesheet'/>
+</head>
+<body>
+
+    <div class="logout-container">
+    <form action="{% url 'cerrar_sesion' %}" method="post" class="logout-btn">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
+</div>
+
+    <div class="content">
+        <h2>Clasificación NBA</h2>
+
+        <!-- Selector de año -->
+        <div class="year-selector">
+            <form method="GET">
+                <label for="year">Selecciona un año:</label>
+                <select id="year" name="year">
+                    {% for y in years %}
+                        <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Ver Clasificación</button>
+            </form>
+        </div>
+
+        {% if este or oeste %}
+            <h3>Conferencia Este</h3>
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Equipo</th>
+                        <th>Victorias</th>
+                        <th>Derrotas</th>
+                        <th>Porcentaje</th>
+                        <th>Últimos 10</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for equipo in este %}
+                        <tr>
+                            <td>{{ equipo.rank }}</td>
+                            <td>
+                                {% if equipo.logo %}
+                                    <img src="{{ equipo.logo }}" alt="{{ equipo.name }}" class="team-logo">
+                                {% else %}
+                                    <img src="{% static 'img/default_logo.png' %}" alt="{{ equipo.name }}" class="team-logo">
+                                {% endif %}
+                                {{ equipo.name }}
+                            </td>
+                            <td>{{ equipo.win }}</td>
+                            <td>{{ equipo.loss }}</td>
+                            <td>{{ equipo.percentage }}</td>
+                            <td>{{ equipo.lastTen }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Conferencia Oeste</h3>
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Equipo</th>
+                        <th>Victorias</th>
+                        <th>Derrotas</th>
+                        <th>Porcentaje</th>
+                        <th>Últimos 10</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for equipo in oeste %}
+                        <tr>
+                            <td>{{ equipo.rank }}</td>
+                            <td>
+                                {% if equipo.logo %}
+                                    <img src="{{ equipo.logo }}" alt="{{ equipo.name }}" class="team-logo">
+                                {% else %}
+                                    <img src="{% static 'img/default_logo.png' %}" alt="{{ equipo.name }}" class="team-logo">
+                                {% endif %}
+                                {{ equipo.name }}
+                            </td>
+                            <td>{{ equipo.win }}</td>
+                            <td>{{ equipo.loss }}</td>
+                            <td>{{ equipo.percentage }}</td>
+                            <td>{{ equipo.lastTen }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No se pudo cargar la clasificación.</p>
+        {% endif %}
+    </div>
+
+    <div class="footer-nav">
+        <a href="{% url 'noticias' %}" class="nav-button {% if section == 'noticias' %}active{% endif %}">Noticias</a>
+        <a href="{% url 'partidos' %}" class="nav-button {% if section == 'partidos' %}active{% endif %}">Partidos</a>
+        <a href="{% url 'clasificacion' %}" class="nav-button {% if section == 'clasificacion' %}active{% endif %}">Clasificación</a>
+        <a href="{% url 'descubrir' %}" class="nav-button {% if section == 'descubrir' %}active{% endif %}">Descubrir</a>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        var debounceTimer;
+
+        // Manejar el cambio de año y la solicitud AJAX
+        $("form").on("submit", function(event) {
+            event.preventDefault();  // Evitar el comportamiento por defecto del formulario
+
+            let yearSeleccionado = $("#year").val();
+
+            // Cancelar cualquier solicitud pendiente
+            clearTimeout(debounceTimer);
+
+            // Hacer la solicitud después de un retraso
+            debounceTimer = setTimeout(function() {
+                cargarClasificacion(yearSeleccionado);
+            }, 500); // 500 ms de retraso
+        });
+
+        function cargarClasificacion(year) {
+            $.ajax({
+                url: `/obtener_clasificacion/?year=${year}`,  // Cambiado para llamar al backend
+                method: 'GET',
+                success: function(response) {
+                    if (!response || !response.response || response.response.length === 0) {
+                        $('.standings-table tbody').html(`<tr><td colspan="6">No se encontraron clasificaciones.</td></tr>`);
+                        return;
+                    }
+
+                    // Mostrar la clasificación de la conferencia Este
+                    let esteHTML = '';
+                    response.response.forEach(function(equipo) {
+                        let logo = equipo.team.logo ? equipo.team.logo : "{% static 'img/default_logo.png' %}";
+                        esteHTML += `
+                            <tr>
+                                <td>${equipo.rank}</td>
+                                <td><img src="${logo}" alt="${equipo.team.name}" class="team-logo"> ${equipo.team.name}</td>
+                                <td>${equipo.win}</td>
+                                <td>${equipo.loss}</td>
+                                <td>${equipo.percentage}</td>
+                                <td>${equipo.lastTen}</td>
+                            </tr>
+                        `;
+                    });
+
+                    // Insertar los datos en la tabla
+                    $('.standings-table tbody').html(esteHTML);
+                },
+                error: function(error) {
+                    $('.standings-table tbody').html(`<tr><td colspan="6">Error al obtener los datos.</td></tr>`);
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

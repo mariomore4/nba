@@ -1,0 +1,36 @@
+{
+  "este": [
+    {"rank":"1","name":"Cleveland Cavaliers","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Cleveland_Cavaliers_logo.svg/330px-Cleveland_Cavaliers_logo.svg.png","win":64,"loss":18,"percentage":".780","lastTen":6},
+    {"rank":"2","name":"Boston Celtics","logo":"https://upload.wikimedia.org/wikipedia/en/8/8f/Boston_Celtics.svg","win":61,"loss":21,"percentage":".744","lastTen":8},
+    {"rank":"3","name":"New York Knicks","logo":"https://upload.wikimedia.org/wikipedia/en/2/25/New_York_Knicks_logo.svg","win":51,"loss":31,"percentage":".622","lastTen":4},
+    {"rank":"4","name":"Indiana Pacers","logo":"https://upload.wikimedia.org/wikipedia/en/thumb/1/1b/Indiana_Pacers.svg/300px-Indiana_Pacers.svg.png","win":50,"loss":32,"percentage":".610","lastTen":5},
+    {"rank":"5","name":"Milwaukee Bucks","logo":"https://upload.wikimedia.org/wikipedia/en/4/4a/Milwaukee_Bucks_logo.svg","win":48,"loss":34,"percentage":".585","lastTen":6},
+    {"rank":"6","name":"Detroit Pistons","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Logo_of_the_Detroit_Pistons.svg/300px-Logo_of_the_Detroit_Pistons.svg.png","win":44,"loss":38,"percentage":".537","lastTen":4},
+    {"rank":"7","name":"Orlando Magic","logo":"https://upload.wikimedia.org/wikipedia/en/1/10/Orlando_Magic_logo.svg","win":41,"loss":41,"percentage":".500","lastTen":5},
+    {"rank":"8","name":"Miami Heat","logo":"https://upload.wikimedia.org/wikipedia/en/f/fb/Miami_Heat_logo.svg","win":37,"loss":45,"percentage":".451","lastTen":3},
+    {"rank":"9","name":"Atlanta Hawks","logo":"https://upload.wikimedia.org/wikipedia/en/2/24/Atlanta_Hawks_logo.svg","win":40,"loss":42,"percentage":".488","lastTen":5},
+    {"rank":"10","name":"Chicago Bulls","logo":"https://upload.wikimedia.org/wikipedia/en/6/67/Chicago_Bulls_logo.svg","win":39,"loss":43,"percentage":".476","lastTen":7},
+    {"rank":"11","name":"Toronto Raptors","logo":"https://upload.wikimedia.org/wikipedia/en/3/36/Toronto_Raptors_logo.svg","win":30,"loss":52,"percentage":".366","lastTen":2},
+    {"rank":"12","name":"Brooklyn Nets","logo":"https://upload.wikimedia.org/wikipedia/commons/4/44/Brooklyn_Nets_newlogo.svg","win":26,"loss":56,"percentage":".317","lastTen":3},
+    {"rank":"13","name":"Philadelphia 76ers","logo":"https://upload.wikimedia.org/wikipedia/en/0/0e/Philadelphia_76ers_logo.svg","win":24,"loss":58,"percentage":".293","lastTen":1},
+    {"rank":"14","name":"Charlotte Hornets","logo":"https://upload.wikimedia.org/wikipedia/en/c/c4/Charlotte_Hornets_%282014%29.svg","win":19,"loss":63,"percentage":".232","lastTen":1},
+    {"rank":"15","name":"Washington Wizards","logo":"https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg","win":18,"loss":64,"percentage":".220","lastTen":1}
+  ],
+  "oeste": [
+    {"rank":"1","name":"Oklahoma City Thunder","logo":"https://upload.wikimedia.org/wikipedia/en/5/5d/Oklahoma_City_Thunder.svg","win":68,"loss":14,"percentage":".829","lastTen":8},
+    {"rank":"2","name":"Houston Rockets","logo":"https://upload.wikimedia.org/wikipedia/en/2/28/Houston_Rockets.svg","win":52,"loss":30,"percentage":".634","lastTen":4},
+    {"rank":"3","name":"Los Angeles Lakers","logo":"https://upload.wikimedia.org/wikipedia/commons/3/3c/Los_Angeles_Lakers_logo.svg","win":50,"loss":32,"percentage":".610","lastTen":6},
+    {"rank":"4","name":"Denver Nuggets","logo":"https://upload.wikimedia.org/wikipedia/en/7/76/Denver_Nuggets.svg","win":50,"loss":32,"percentage":".610","lastTen":5},
+    {"rank":"5","name":"Los Angeles Clippers","logo":"https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Los_Angeles_Clippers_%282024%29.svg/300px-Los_Angeles_Clippers_%282024%29.svg.png","win":50,"loss":32,"percentage":".610","lastTen":5},
+    {"rank":"6","name":"Minnesota Timberwolves","logo":"https://upload.wikimedia.org/wikipedia/en/c/c2/Minnesota_Timberwolves_logo.svg","win":49,"loss":33,"percentage":".598","lastTen":6},
+    {"rank":"7","name":"Golden State Warriors","logo":"https://upload.wikimedia.org/wikipedia/en/0/01/Golden_State_Warriors_logo.svg","win":48,"loss":34,"percentage":".585","lastTen":7},
+    {"rank":"8","name":"Memphis Grizzlies","logo":"https://upload.wikimedia.org/wikipedia/en/f/f1/Memphis_Grizzlies.svg","win":48,"loss":34,"percentage":".585","lastTen":6},
+    {"rank":"9","name":"Sacramento Kings","logo":"https://upload.wikimedia.org/wikipedia/en/c/c7/SacramentoKings.svg","win":40,"loss":42,"percentage":".488","lastTen":3},
+    {"rank":"10","name":"Dallas Mavericks","logo":"https://upload.wikimedia.org/wikipedia/en/9/97/Dallas_Mavericks_logo.svg","win":39,"loss":43,"percentage":".476","lastTen":4},
+    {"rank":"11","name":"Phoenix Suns","logo":"https://upload.wikimedia.org/wikipedia/en/d/dc/Phoenix_Suns_logo.svg","win":36,"loss":46,"percentage":".439","lastTen":3},
+    {"rank":"12","name":"Portland Trail Blazers","logo":"https://upload.wikimedia.org/wikipedia/en/2/21/Portland_Trail_Blazers_logo.svg","win":36,"loss":46,"percentage":".439","lastTen":2},
+    {"rank":"13","name":"San Antonio Spurs","logo":"https://upload.wikimedia.org/wikipedia/en/a/a2/San_Antonio_Spurs.svg","win":34,"loss":48,"percentage":".415","lastTen":1},
+    {"rank":"14","name":"New Orleans Pelicans","logo":"https://upload.wikimedia.org/wikipedia/en/0/0d/New_Orleans_Pelicans_logo.svg","win":21,"loss":61,"percentage":".256","lastTen":1},
+    {"rank":"15","name":"Utah Jazz","logo":"https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Utah_Jazz_logo_2025.svg/345px-Utah_Jazz_logo_2025.svg.png","win":17,"loss":65,"percentage":".207","lastTen":0}
+  ]
+}

@@ -1,0 +1,38 @@
+/* Estilo para el contenedor del formulario */
+body{
+    width: 300px; /* Ancho del contenedor del formulario */
+    margin: 0 auto; /* Centrar horizontalmente */
+    display: flex; /* Activar flexbox */
+    flex-direction: column; /* Organizar los elementos en columna */
+    justify-content: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura del contenedor igual a la altura de la ventana */
+    background-image: url(/static/images/img_inicio_sesion.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Estilo para los campos de entrada */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Ancho completo */
+    margin-bottom: 10px; /* Espacio entre los campos */
+    padding: 8px; /* Espaciado interno */
+    box-sizing: border-box; /* Incluir el borde y el relleno en el tamaño total */
+}
+
+/* Estilo para el botón de enviar */
+button[type="submit"] {
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interno */
+    background-color: #4CAF50; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambiar el cursor al pasar el ratón sobre el botón */
+}
+
+/* Estilo para el contenedor de mensajes de error */
+.error-container {
+    margin-bottom: 10px; /* Espacio entre el contenedor de errores y el botón de enviar */
+    color: red; /* Color del texto del mensaje de error */
+}

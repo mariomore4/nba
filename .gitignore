@@ -1,0 +1,31 @@
+# Entorno virtual
+venv/
+env/
+
+# Archivos Python compilados
+__pycache__/
+*.py[cod]
+
+# Archivos de configuración de VSCode
+.vscode/
+
+# Base de datos SQLite
+*.sqlite3
+
+# Archivos de migración
+*/migrations/*.pyc
+*/migrations/__pycache__/
+
+# Archivos temporales y de sistema
+*.log
+*.pot
+*.mo
+*.swp
+.DS_Store
+
+# Archivos estáticos generados
+staticfiles/
+static_root/
+
+# Configuración local
+.env
