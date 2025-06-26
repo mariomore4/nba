@@ -24,8 +24,8 @@ __pycache__/
 .DS_Store
 
 # Archivos estáticos generados
-staticfiles/
-static_root/
+#staticfiles/
+#static_root/
 
 # Configuración local
 .env
