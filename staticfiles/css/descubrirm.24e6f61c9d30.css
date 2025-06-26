@@ -1,0 +1,176 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Cambié esto para que no se desplace hacia abajo */
+    height: 100vh;
+    overflow: hidden; /* Evita que el contenido se desborde */
+    background-image: url("/static/images/fondomenu.db499a83e5bd.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.logout-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.logout-btn button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn button:hover {
+    background-color: #e60000;
+}
+
+/* Main container for centering everything */
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 900px;
+    overflow-y: auto; /* Esto asegura que el contenido se pueda desplazar */
+    max-height: 90vh; /* Limita la altura para que se pueda hacer scroll si es necesario */
+}
+
+/* Styling the search container */
+.search-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 70%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.search-container button:hover {
+    background-color: #45a049;
+}
+
+/* Styling the results container */
+.resultados-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.resultados-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%; /* Asegura que el título ocupe todo el ancho */
+}
+
+/* Estilos para la lista desplegable de jugadores */
+#jugadores-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+.jugador-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.jugador-item:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: #e0e0e0;
+}
+
+/* Detalles del jugador */
+#jugador-details {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-top: 20px;
+    width: 100%; /* Ocupa todo el ancho */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centra el contenido horizontalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
+}
+
+/* Footer nav styles */
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 10;
+}
+
+.footer-nav .nav-button {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.footer-nav .nav-button.active {
+    background-color: green; /* Fondo verde */
+    border: 2px solid green; /* Bordes verdes */
+}
+
+.footer-nav .nav-button:hover {
+    background-color: #0056b3; /* Efecto hover con color azul */
+}
+
+.jugador-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.jugador-item:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: #dfe6e9;
+    color: #2d3436;
+}

@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    background-image: url("/static/images/fondomenu.db499a83e5bd.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Botón de cerrar sesión */
+.logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.logout-btn button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logout-btn button:hover {
+    background-color: #ff1a1a;
+}
+
+/* Contenedor principal */
+.stats-container {
+    padding: 20px;
+    padding-bottom: 160px; /* Aumentar espacio en la parte inferior para evitar solapamiento con el footer */
+    margin-bottom: 0;
+}
+
+/* Pestañas */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tabs a {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.tabs a.active {
+    background-color: #4caf50;
+    color: white;
+    border-color: #4caf50;
+}
+
+.tabs a:hover {
+    background-color: #ddd;
+}
+
+/* Tablas */
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.stats-table th,
+.stats-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.stats-table th {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.stats-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.stats-table td {
+    background-color: white;
+}
+
+/* Footer */
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    text-align: center;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #0066cc;
+}
+
+.nav-button.active {
+    background-color: #28a745;
+}
+
+/* Contenedor tabla */
+.stats-table-container {
+    margin-bottom: 60px;
+}
+
+/* Tamaño de los logos */
+.team-logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+/* Añadir margen entre la tabla de estadísticas y el footer */
+.stats-table, .logout-container {
+    margin-bottom: 60px; /* Espacio adicional entre las tablas y el banner */
+}

@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url("/static/images/fondomenu.db499a83e5bd.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.logout-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.logout-btn button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn button:hover {
+    background-color: #e60000;
+}
+
+h2 {
+    margin: 20px 0;
+    color: #333;
+}
+
+h3 {
+    color: #007bff;
+    margin-top: 30px;
+}
+
+.year-selector {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.year-selector label {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+.year-selector select {
+    font-size: 1em;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.year-selector button {
+    font-size: 1em;
+    padding: 5px 10px;
+    margin-left: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.year-selector button:hover {
+    background-color: #0056b3;
+}
+
+.standings-table {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.content {
+    padding-bottom: 70px;
+}
+
+.standings-table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.standings-table th, .standings-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.standings-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.standings-table td:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-left: 10px;
+}
+
+.team-logo {
+    width: 30px;
+    height: 30px;
+}
+
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 10;
+}
+
+.footer-nav .nav-button {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.footer-nav .nav-button.active {
+    background-color: green;
+}
+
+.footer-nav .nav-button:hover {
+    background-color: #0056b3;
+}
+
