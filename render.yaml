@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: nba-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn mysite.wsgi:application"
+    staticPublishPath: staticfiles
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: mysite.settings
+      - key: PYTHON_VERSION
+        value: 3.12.2
