@@ -25,8 +25,3 @@ urlpatterns = [
 
 ]
 
-if os.environ.get("RENDER", False):
-    try:
-        import create_superuser
-    except Exception as e:
-        print(f"Error al crear superusuario: {e}")
