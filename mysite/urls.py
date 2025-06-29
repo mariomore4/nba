@@ -17,9 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+import os
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('nba.urls')),
 
 ]
+
+if os.environ.get("RENDER", False):
+    try:
+        import create_superuser
+    except Exception as e:
+        print(f"Error al crear superusuario: {e}")
